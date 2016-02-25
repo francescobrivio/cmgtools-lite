@@ -11,7 +11,9 @@ from CMGTools.H2TauTau.proto.analyzers.TauIsolationCalculator import TauIsolatio
 from CMGTools.H2TauTau.proto.analyzers.MuonIsolationCalculator import MuonIsolationCalculator
 
 from CMGTools.RootTools.utils.splitFactor import splitFactor
-from CMGTools.H2TauTau.proto.samples.fall15.htt_common import backgrounds_mu, sm_signals, mssm_signals, data_single_muon, sync_list
+#from CMGTools.H2TauTau.proto.samples.fall15.htt_common import backgrounds_mu, sm_signals, mssm_signals, data_single_muon, sync_list
+from CMGTools.H2TauTau.proto.samples.fall15.htt_common import data_single_muon
+from CMGTools.H2TauTau.proto.samples.fall15.higgs_susy import HiggsSUSYGG160 as ggh160
 from CMGTools.H2TauTau.proto.samples.fall15.triggers_tauMu import mc_triggers, mc_triggerfilters
 from CMGTools.H2TauTau.proto.samples.fall15.triggers_tauMu import data_triggers, data_triggerfilters
 
@@ -23,7 +25,7 @@ from CMGTools.H2TauTau.htt_ntuple_base_cff import puFileData, puFileMC, eventSel
 production = getHeppyOption('production')
 production = False
 pick_events = False
-syncntuple = True
+syncntuple = False
 cmssw = True
 data = False
 
@@ -53,8 +55,8 @@ if cmssw:
     tauMuAna.from_single_objects = False
 
 # Minimal list of samples
-samples = backgrounds_mu + sm_signals + sync_list + mssm_signals
-
+#samples = backgrounds_mu + sm_signals + sync_list + mssm_signals
+samples = [ggh160]
 
 split_factor = 5e3
 split_factor = 1e5
@@ -83,9 +85,9 @@ for mc in samples:
 ###################################################
 ###             SET COMPONENTS BY HAND          ###
 ###################################################
-selectedComponents = data_list if data else backgrounds_mu + sm_signals
+#selectedComponents = data_list if data else backgrounds_mu + sm_signals
 
-selectedComponents = [s for s in selectedComponents if 'DYJets' in s.name] + mssm_signals
+#selectedComponents = [s for s in selectedComponents if 'DYJets' in s.name] + mssm_signals
 
 ###################################################
 ###             CHERRY PICK EVENTS              ###
@@ -103,19 +105,20 @@ if not cmssw:
     module = [s for s in sequence if s.name == 'MCWeighter'][0]
     sequence.remove(module)
 
-selectedComponents = [s for s in selectedComponents if 'BB' in s.name]
+#selectedComponents = [s for s in selectedComponents if 'BB' in s.name]
 ###################################################
 ###            SET BATCH OR LOCAL               ###
 ###################################################
 if not production:
     cache = True
-    comp = sync_list[0]
+    #comp = sync_list[0]
     # comp = [s for s in selectedComponents if 'DYJets' in s.name][0]
     # comp = [s for s in selectedComponents if 'HiggsSUSYBB110' in s.name][0]
+    comp = ggh160
     selectedComponents = [comp]
     # selectedComponents = [selectedComponents[0]]
     # comp = selectedComponents[0]
-    comp.splitFactor = 5
+    comp.splitFactor = 1
     comp.fineSplitFactor = 1
     # comp.files = comp.files[]
 

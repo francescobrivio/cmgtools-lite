@@ -28,6 +28,7 @@ syncntuple   = False
 computeSVfit = False
 pick_events  = False
 cmssw        = True
+#cmssw        = False
 data = False
 
 dyJetsFakeAna.channel = 'tt'
@@ -142,12 +143,13 @@ svfitProducer = cfg.Analyzer(
 ###################################################
 from CMGTools.RootTools.utils.splitFactor import splitFactor
 from CMGTools.H2TauTau.proto.samples.data15.data import data_tau
-from CMGTools.H2TauTau.proto.samples.fall15.htt_common import backgrounds, sm_signals, mssm_signals, data_tau, sync_list
+#from CMGTools.H2TauTau.proto.samples.fall15.htt_common import backgrounds, sm_signals, mssm_signals, data_tau, sync_list
 from CMGTools.H2TauTau.proto.samples.fall15.higgs_susy import HiggsSUSYGG160 as ggh160
 from CMGTools.H2TauTau.proto.samples.fall15.triggers_tauTau import mc_triggers, mc_triggerfilters, data_triggers, data_triggerfilters
 
 data_list = data_tau
-samples = backgrounds + sm_signals + mssm_signals
+#samples = backgrounds + sm_signals + mssm_signals
+samples = [ggh160]
 
 split_factor = 1e5
 
@@ -223,10 +225,11 @@ if not production:
   cache                = True
   comp                 = ggh160
   # comp = data_list[0]
-  comp = [s for s in selectedComponents if 'TBarToLeptons_tch_powheg' in s.name][0]
+  #comp = [s for s in selectedComponents if 'TBarToLeptons_tch_powheg' in s.name][0]
   selectedComponents   = [comp]
-  comp.splitFactor     = 5
-  comp.fineSplitFactor = 1
+  for comp in selectedComponents:
+      comp.splitFactor     = 1
+      comp.fineSplitFactor = 1
 #   comp.files           = comp.files[:1]
     
 preprocessor = None
