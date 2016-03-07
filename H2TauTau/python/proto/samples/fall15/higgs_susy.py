@@ -4,6 +4,8 @@ from CMGTools.RootTools.samples.ComponentCreator import ComponentCreator
 
 creator = ComponentCreator()
 
+HiggsGGH125 = creator.makeMCComponent("HiggsGGH125", "/GluGluHToTauTau_M125_13TeV_powheg_pythia8/RunIIFall15MiniAODv2-PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/MINIAODSIM", "CMS", ".*root", 1.0)
+
 HiggsSUSYGG80 = creator.makeMCComponent("HiggsSUSYGG80", "/SUSYGluGluToHToTauTau_M-80_TuneCUETP8M1_13TeV-pythia8/RunIIFall15MiniAODv2-PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/MINIAODSIM", "CMS", ".*root", 1.0)
 HiggsSUSYGG90 = creator.makeMCComponent("HiggsSUSYGG90", "/SUSYGluGluToHToTauTau_M-90_TuneCUETP8M1_13TeV-pythia8/RunIIFall15MiniAODv2-PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/MINIAODSIM", "CMS", ".*root", 1.0)
 HiggsSUSYGG100 = creator.makeMCComponent("HiggsSUSYGG100", "/SUSYGluGluToHToTauTau_M-100_TuneCUETP8M1_13TeV-pythia8/RunIIFall15MiniAODv2-PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/MINIAODSIM", "CMS", ".*root", 1.0)

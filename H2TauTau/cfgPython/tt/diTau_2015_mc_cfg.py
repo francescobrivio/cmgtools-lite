@@ -24,12 +24,13 @@ production = getHeppyOption('production')
 production = False
 
 # local switches
-syncntuple   = False
-computeSVfit = False
+syncntuple   = True
+computeSVfit = True
 pick_events  = False
 cmssw        = True
 #cmssw        = False
 data = False
+
 
 dyJetsFakeAna.channel = 'tt'
 
@@ -142,14 +143,30 @@ svfitProducer = cfg.Analyzer(
 ### CONNECT SAMPLES TO THEIR ALIASES AND FILES  ###
 ###################################################
 from CMGTools.RootTools.utils.splitFactor import splitFactor
-from CMGTools.H2TauTau.proto.samples.data15.data import data_tau
+
+#from CMGTools.H2TauTau.proto.samples.data15.data import data_tau
 #from CMGTools.H2TauTau.proto.samples.fall15.htt_common import backgrounds, sm_signals, mssm_signals, data_tau, sync_list
 from CMGTools.H2TauTau.proto.samples.fall15.higgs_susy import HiggsSUSYGG160 as ggh160
+from CMGTools.H2TauTau.proto.samples.fall15.higgs_susy import HiggsGGH125
+
+from CMGTools.RootTools.samples.samples_13TeV_DATA2015 import Tau_Run2015D_16Dec, Tau_Run2015D_Promptv4, Tau_Run2015D_05Oct
+
+from CMGTools.RootTools.samples.samples_13TeV_RunIIFall15MiniAODv2 import DYJetsToLL_M50_LO, TT_pow_ext
+from CMGTools.RootTools.samples.samples_13TeV_RunIIFall15MiniAODv2 import TToLeptons_tch_powheg, TBarToLeptons_tch_powheg, T_tWch, TBar_tWch
+from CMGTools.RootTools.samples.samples_13TeV_RunIIFall15MiniAODv2 import ZZTo2L2Q, ZZTo4L_new, WZTo1L3Nu, WZTo3L, WWTo1L1Nu2Q, WZTo1L1Nu2Q
+
 from CMGTools.H2TauTau.proto.samples.fall15.triggers_tauTau import mc_triggers, mc_triggerfilters, data_triggers, data_triggerfilters
 
-data_list = data_tau
+#data_list = data_tau
+data_list = [Tau_Run2015D_05Oct]
 #samples = backgrounds + sm_signals + mssm_signals
-samples = [ggh160]
+samples = [HiggsGGH125]
+#samples = [ggh160]
+#samples = [DYJetsToLL_M50_LO]
+#samples = [TT_pow_ext]
+#samples = [ZZTo2L2Q, WZTo3L, WZTo1L1Nu2Q]
+#samples = [WZTo1L3Nu, WWTo1L1Nu2Q, ZZTo4L_new]
+#samples = [T_tWch, TBar_tWch, TToLeptons_tch_powheg, TBarToLeptons_tch_powheg]
 
 split_factor = 1e5
 
@@ -223,13 +240,14 @@ if pick_events:
 ###################################################
 if not production:
   cache                = True
-  comp                 = ggh160
+  #comp                = ggh160
   # comp = data_list[0]
   #comp = [s for s in selectedComponents if 'TBarToLeptons_tch_powheg' in s.name][0]
-  selectedComponents   = [comp]
+  #selectedComponents   = [comp]
+  #selectedComponentes  = samples
   for comp in selectedComponents:
       comp.splitFactor     = 1
-      comp.fineSplitFactor = 1
+      comp.fineSplitFactor = 4
 #   comp.files           = comp.files[:1]
     
 preprocessor = None

@@ -54,11 +54,13 @@ def createProcess(runOnMC=True, channel='di-mu', runSVFit=False,
         )
     else:
         # from CMGTools.RootTools.samples.samples_13TeV_DATA2015 import SingleMuon_Run2015D_Promptv4
+        from CMGTools.RootTools.samples.samples_13TeV_DATA2015 import Tau_Run2015D_16Dec
         process.source = cms.Source(
             "PoolSource",
             noEventSort = cms.untracked.bool(True),
             duplicateCheckMode = cms.untracked.string("noDuplicateCheck"),
-            fileNames = cms.untracked.vstring('root://eoscms.cern.ch//eos/cms/store/data/Run2015D/SingleMuon/MINIAOD/PromptReco-v4/000/258/159/00000/6CA1C627-246C-E511-8A6A-02163E014147.root')
+            #fileNames = cms.untracked.vstring('root://eoscms.cern.ch//eos/cms/store/data/Run2015D/SingleMuon/MINIAOD/PromptReco-v4/000/258/159/00000/6CA1C627-246C-E511-8A6A-02163E014147.root')
+            fileNames = cms.untracked.vstring(Tau_Run2015D_16Dec.files)
         )
 
 

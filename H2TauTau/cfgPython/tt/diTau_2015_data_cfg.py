@@ -133,7 +133,10 @@ from CMGTools.RootTools.utils.splitFactor import splitFactor
 from CMGTools.H2TauTau.proto.samples.data15.data import data_tau
 from CMGTools.H2TauTau.proto.samples.spring15.triggers_tauTau import data_triggers, data_triggerfilters
 
-data_list = data_tau
+from CMGTools.RootTools.samples.samples_13TeV_DATA2015 import Tau_Run2015D_16Dec
+
+#data_list = data_tau
+data_list = [Tau_Run2015D_16Dec]
 
 split_factor = 1e5
 
@@ -191,7 +194,7 @@ if not production:
   cache                = True
   comp                 = data_tau[0]
   selectedComponents   = [comp]
-  comp.splitFactor     = 2
+  comp.splitFactor     = 1
   comp.fineSplitFactor = 1
   comp.files           = comp.files[:2]
     

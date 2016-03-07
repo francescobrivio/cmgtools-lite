@@ -25,7 +25,7 @@ from CMGTools.H2TauTau.htt_ntuple_base_cff import puFileData, puFileMC, eventSel
 production = getHeppyOption('production')
 production = False
 pick_events = False
-syncntuple = False
+syncntuple = True
 cmssw = True
 data = False
 
@@ -119,7 +119,7 @@ if not production:
     # selectedComponents = [selectedComponents[0]]
     # comp = selectedComponents[0]
     comp.splitFactor = 1
-    comp.fineSplitFactor = 1
+    comp.fineSplitFactor = 4
     # comp.files = comp.files[]
 
 preprocessor = None
