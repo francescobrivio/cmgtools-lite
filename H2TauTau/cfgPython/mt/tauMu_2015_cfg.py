@@ -29,6 +29,11 @@ syncntuple = True
 cmssw = True
 data = False
 
+# Just to be sure
+if production:
+    syncntuple = False
+    pick_events = False
+
 # Define extra modules
 tauIsoCalc = cfg.Analyzer(
     TauIsolationCalculator,
@@ -59,7 +64,7 @@ if cmssw:
 samples = [ggh160]
 
 split_factor = 5e3
-split_factor = 1e5
+# split_factor = 1e5
 
 for sample in samples:
     sample.triggers = mc_triggers
@@ -106,6 +111,7 @@ if not cmssw:
     sequence.remove(module)
 
 #selectedComponents = [s for s in selectedComponents if 'BB' in s.name]
+
 ###################################################
 ###            SET BATCH OR LOCAL               ###
 ###################################################
