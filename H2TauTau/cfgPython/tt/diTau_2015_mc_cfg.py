@@ -160,8 +160,8 @@ from CMGTools.H2TauTau.proto.samples.fall15.triggers_tauTau import mc_triggers, 
 #data_list = data_tau
 data_list = [Tau_Run2015D_05Oct]
 #samples = backgrounds + sm_signals + mssm_signals
-samples = [HiggsGGH125]
-#samples = [ggh160]
+#samples = [HiggsGGH125]
+samples = [ggh160]
 #samples = [DYJetsToLL_M50_LO]
 #samples = [TT_pow_ext]
 #samples = [ZZTo2L2Q, WZTo3L, WZTo1L1Nu2Q]
@@ -240,14 +240,14 @@ if pick_events:
 ###################################################
 if not production:
   cache                = True
-  #comp                = ggh160
+  comp                = ggh160
   # comp = data_list[0]
   #comp = [s for s in selectedComponents if 'TBarToLeptons_tch_powheg' in s.name][0]
   #selectedComponents   = [comp]
   #selectedComponentes  = samples
   for comp in selectedComponents:
       comp.splitFactor     = 1
-      comp.fineSplitFactor = 4
+      comp.fineSplitFactor = 3
 #   comp.files           = comp.files[:1]
     
 preprocessor = None

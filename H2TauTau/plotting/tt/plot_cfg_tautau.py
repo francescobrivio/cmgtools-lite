@@ -11,13 +11,13 @@ from CMGTools.H2TauTau.proto.plotter.Variables import all_vars, getVars
 from CMGTools.H2TauTau.proto.plotter.Samples import createSampleLists
 
 int_lumi = 2240. # from Alexei's email
-#qcd_from_same_sign = True
-qcd_from_same_sign = False
+qcd_from_same_sign = True
+#qcd_from_same_sign = False
 #analysis_dir = '/afs/cern.ch/user/s/steggema/work/public/mt/180216/'
 analysis_dir = '/afs/cern.ch/work/f/fbrivio/Sync2015/CMSSW_7_6_3/src/CMGTools/H2TauTau/cfgPython/tt/backgrounds04/'
 
 total_weight = 'weight'
-total_weight = 'weight/l1_weight'
+#total_weight = 'weight/l1_weight'
 # total_weight = 'geninfo_mcweight'
 # total_weight = 'weight/l1_weight/weight_njet'
 # total_weight = 'weight/l1_weight/weight_njet/weight_vertex'
@@ -56,7 +56,7 @@ if qcd_from_same_sign:
             # Subtract background from data
             sample.scale = -scale
 
-    qcd = HistogramCfg(name='QCD', var=None, cfgs=samples_ss, cut=inc_cut, lumi=int_lumi, weight=total_weight)
+    qcd = HistogramCfg(name='QCD', var=None, cfgs=samples_ss, cut=inc_cut+'&& l1_charge == l2_charge', lumi=int_lumi, weight=total_weight)
 
     samples_qcdfromss.append(qcd)
 
