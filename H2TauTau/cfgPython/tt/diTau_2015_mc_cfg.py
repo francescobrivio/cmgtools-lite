@@ -21,7 +21,7 @@ from CMGTools.H2TauTau.htt_ntuple_base_cff import commonSequence, genAna, dyJets
 
 # production = True run on batch, production = False (or unset) run locally
 production = getHeppyOption('production')
-production = False
+production = True
 
 # local switches
 syncntuple   = True
@@ -151,21 +151,22 @@ from CMGTools.H2TauTau.proto.samples.fall15.higgs_susy import HiggsGGH125
 
 from CMGTools.RootTools.samples.samples_13TeV_DATA2015 import Tau_Run2015D_16Dec, Tau_Run2015D_Promptv4, Tau_Run2015D_05Oct
 
-from CMGTools.RootTools.samples.samples_13TeV_RunIIFall15MiniAODv2 import DYJetsToLL_M50_LO, TT_pow_ext
+from CMGTools.RootTools.samples.samples_13TeV_RunIIFall15MiniAODv2 import DYJetsToLL_M50_LO, TT_pow_ext, WJetsToLNu_LO
 from CMGTools.RootTools.samples.samples_13TeV_RunIIFall15MiniAODv2 import TToLeptons_tch_powheg, TBarToLeptons_tch_powheg, T_tWch, TBar_tWch
 from CMGTools.RootTools.samples.samples_13TeV_RunIIFall15MiniAODv2 import ZZTo2L2Q, ZZTo4L_new, WZTo1L3Nu, WZTo3L, WWTo1L1Nu2Q, WZTo1L1Nu2Q
 
 from CMGTools.H2TauTau.proto.samples.fall15.triggers_tauTau import mc_triggers, mc_triggerfilters, data_triggers, data_triggerfilters
 
 #data_list = data_tau
-data_list = [Tau_Run2015D_05Oct]
+data_list = [Tau_Run2015D_16Dec]
 #samples = backgrounds + sm_signals + mssm_signals
 #samples = [HiggsGGH125]
-samples = [ggh160]
+#samples = [ggh160]
 #samples = [DYJetsToLL_M50_LO]
 #samples = [TT_pow_ext]
-#samples = [ZZTo2L2Q, WZTo3L, WZTo1L1Nu2Q]
-#samples = [WZTo1L3Nu, WWTo1L1Nu2Q, ZZTo4L_new]
+samples = [WJetsToLNu_LO]
+#samples = [WZTo1L3Nu, ZZTo2L2Q, WZTo3L, WZTo1L1Nu2Q]
+#samples = [WWTo1L1Nu2Q, ZZTo4L_new]
 #samples = [T_tWch, TBar_tWch, TToLeptons_tch_powheg, TBarToLeptons_tch_powheg]
 
 split_factor = 1e5
@@ -240,14 +241,15 @@ if pick_events:
 ###################################################
 if not production:
   cache                = True
-  comp                = ggh160
+  #comp                = ggh160
+  #comp                 = WZTo1L3Nu
   # comp = data_list[0]
   #comp = [s for s in selectedComponents if 'TBarToLeptons_tch_powheg' in s.name][0]
   #selectedComponents   = [comp]
-  #selectedComponentes  = samples
+  selectedComponentes  = samples
   for comp in selectedComponents:
-      comp.splitFactor     = 1
-      comp.fineSplitFactor = 3
+      comp.splitFactor     = 3
+      comp.fineSplitFactor = 2
 #   comp.files           = comp.files[:1]
     
 preprocessor = None
