@@ -24,6 +24,7 @@ def createProcess(runOnMC=True, channel='tau-mu', runSVFit=False,
 
     process = cms.Process("H2TAUTAU")
 
+
     # Adding jet collection
     process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff')
     process.GlobalTag.globaltag = '76X_mcRun2_asymptotic_RunIIFall15DR76_v1'
@@ -46,7 +47,8 @@ def createProcess(runOnMC=True, channel='tau-mu', runSVFit=False,
     ) # Make sure to choose the appropriate levels and payload here!
 
     if not runOnMC:
-        process.patJetCorrFactorsReapplyJEC.levels += ['L3Residual']
+        #process.patJetCorrFactorsReapplyJEC.levels += ['L3Residual']
+        process.patJetCorrFactorsReapplyJEC.levels += ['L2L3Residual']
 
     from PhysicsTools.PatAlgos.producersLayer1.jetUpdater_cff import patJetsUpdated
     process.patJetsReapplyJEC = patJetsUpdated.clone(
@@ -239,6 +241,10 @@ def createProcess(runOnMC=True, channel='tau-mu', runSVFit=False,
     if channel == 'di-tau' or 'all' in channel:
         addDiTauOutput(process, debugEventContent, addPreSel=False, oneFile=oneFile)
 
+    # FRANCESCO: removing gen particles selection from diTauSequence for data
+    if not runOnMC:
+        process.diTauSequence.remove(process.cmgDiTauCor)
+        process.cmgDiTauTauPtSel.src = 'cmgDiTau'
 
 
     # if not runOnMC:

@@ -29,7 +29,7 @@ computeSVfit = True
 pick_events  = False
 cmssw        = True
 #cmssw        = False
-data = False
+data = True
 
 
 dyJetsFakeAna.channel = 'tt'
@@ -246,10 +246,10 @@ if not production:
   # comp = data_list[0]
   #comp = [s for s in selectedComponents if 'TBarToLeptons_tch_powheg' in s.name][0]
   #selectedComponents   = [comp]
-  selectedComponentes  = samples
+  #selectedComponentes  = samples
   for comp in selectedComponents:
       comp.splitFactor     = 3
-      comp.fineSplitFactor = 2
+      comp.fineSplitFactor = 1
 #   comp.files           = comp.files[:1]
     
 preprocessor = None
